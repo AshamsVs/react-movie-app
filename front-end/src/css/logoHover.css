@@ -1,0 +1,40 @@
+.logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform .35s ease;
+}
+
+.brand-logo {
+  width: 150px;
+  filter: drop-shadow(0 0 6px rgba(255, 204, 94, .25));
+  transition: transform .35s ease, filter .35s ease;
+}
+
+.logo-wrapper.hovering .brand-logo {
+  transform: scale(1.07);
+  filter: drop-shadow(0 0 14px rgba(255, 204, 94, .65));
+}
+
+.logo-pulse {
+  position: absolute;
+  width: 140px;
+  height: 40px;
+  border-radius: 12px;
+  background: radial-gradient(circle, rgba(255,215,115,0.35), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s;
+}
+
+.logo-wrapper.hovering .logo-pulse {
+  opacity: 1;
+  animation: pulseGlow 1.8s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(1); opacity: .4; }
+  50% { transform: scale(1.08); opacity: .9; }
+  100% { transform: scale(1); opacity: .4; }
+}

@@ -1,0 +1,259 @@
+/* src/css/orbital.css */
+
+.appletv-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background: radial-gradient(circle at top, #020617, #020617 40%, #000 100%);
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+}
+
+.appletv-hero {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  padding: 32px 60px 40px;
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+  background-image:
+    linear-gradient(to right, rgba(15,23,42,0.95), rgba(15,23,42,0.65), rgba(15,23,42,0.2)),
+    var(--hero-bg);
+  background-size: cover;
+  background-position: center;
+}
+
+.appletv-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.25), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.25), transparent 55%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.appletv-hero-content {
+  position: relative;
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  z-index: 1;
+}
+
+.appletv-hero-poster {
+  width: 190px;
+  height: 270px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(148, 163, 184, 0.5);
+  flex-shrink: 0;
+}
+
+.appletv-hero-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.appletv-hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.appletv-hero-text h1 {
+  margin: 0;
+  font-size: 2.1rem;
+  letter-spacing: 0.02em;
+}
+
+.appletv-hero-year {
+  font-size: 0.98rem;
+  opacity: 0.8;
+}
+
+.appletv-hero-subtitle {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.appletv-strip-container {
+  padding: 18px 40px 32px;
+  box-sizing: border-box;
+}
+
+.appletv-strip-title {
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.appletv-strip {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+.appletv-strip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.appletv-strip::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.appletv-strip::-webkit-scrollbar-thumb {
+  background: rgba(30, 64, 175, 0.7);
+  border-radius: 999px;
+}
+
+.appletv-strip-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  min-width: 130px;
+}
+
+.appletv-strip-poster {
+  width: 130px;
+  height: 190px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  transform-origin: center bottom;
+  transform: scale(0.96);
+  transition:
+    transform 0.18s ease-out,
+    box-shadow 0.18s ease-out,
+    opacity 0.18s ease-out;
+  opacity: 0.85;
+}
+
+.appletv-strip-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.appletv-strip-label {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  max-width: 130px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.appletv-strip-item:hover .appletv-strip-poster {
+  transform: scale(1.03) translateY(-4px);
+  box-shadow:
+    0 24px 55px rgba(0, 0, 0, 1),
+    0 0 0 1px rgba(248, 250, 252, 0.7);
+  opacity: 1;
+}
+
+.appletv-strip-item--active .appletv-strip-poster {
+  transform: scale(1.06) translateY(-6px);
+  box-shadow:
+    0 26px 60px rgba(0, 0, 0, 1),
+    0 0 0 1px rgba(248, 250, 252, 0.9);
+  opacity: 1;
+}
+
+@keyframes tvFloat {
+  0% { transform: scale(1.06) translateY(-6px); }
+  50% { transform: scale(1.08) translateY(-10px); }
+  100% { transform: scale(1.06) translateY(-6px); }
+}
+
+.appletv-strip-item--active .appletv-strip-poster {
+  animation: tvFloat 4s ease-in-out infinite;
+}
+
+.appletv-empty {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+}
+
+.fav-toggle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  transition: 0.25s ease;
+}
+
+.fav-toggle i {
+  font-size: 24px;
+  color: #ffffff80;
+  transition: 0.25s ease;
+}
+
+.fav-toggle:hover {
+  transform: scale(1.12);
+}
+
+.fav-active i {
+  color: #ff2f56;
+  transform: scale(1.25);
+  filter: drop-shadow(0 0 10px #ff2f56);
+}
+
+@media (max-width: 900px) {
+  .appletv-hero {
+    padding: 20px 20px 28px;
+  }
+
+  .appletv-hero-content {
+    gap: 18px;
+  }
+
+  .appletv-hero-poster {
+    width: 140px;
+    height: 200px;
+  }
+
+  .appletv-hero-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .appletv-strip-container {
+    padding-inline: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .appletv-hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .appletv-hero-poster {
+    width: 130px;
+    height: 185px;
+  }
+}

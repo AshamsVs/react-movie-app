@@ -1,16 +1,85 @@
-# React + Vite
+LibraryX
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, fast movie browsing app built with React and Vite. LibraryX includes live search, a favorites system, and an Apple TV–style scrolling interface.
 
-Currently, two official plugins are available:
+Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Live movie search
 
-## React Compiler
+Add and remove favorites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Horizontal movie browser with smooth scroll
 
-## Expanding the ESLint configuration
+Animated logo and premium UI styling
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Persistent favorites using Local Storage
+
+Responsive layout
+
+Tech Stack
+
+React (Hooks + Context API)
+
+Vite
+
+CSS (custom design)
+
+Font Awesome
+
+OMDb API
+
+Installation
+git clone https://github.com/YOUR-USERNAME/LibraryX.git
+cd LibraryX
+npm install
+npm run dev
+
+Build
+npm run build
+npm run preview
+
+Environment Setup
+
+Create .env in the project root:
+
+VITE_OMDB_API_KEY=your_api_key_here
+
+
+API Key available at: https://www.omdbapi.com/apikey.aspx
+
+Project Structure
+src/
+ ┣ assets/
+ ┃ ┗ logo.svg
+ ┣ components/
+ ┃ ┣ BrandLogo.jsx
+ ┃ ┣ NavBar.jsx
+ ┃ ┗ OrbitalGallery.jsx
+ ┣ context/
+ ┃ ┗ movieContext.jsx
+ ┣ pages/
+ ┃ ┣ Home.jsx
+ ┃ ┗ Favorites.jsx
+ ┣ css/
+ ┃ ┣ navbar.css
+ ┃ ┗ orbital.css
+ ┣ App.jsx
+ ┗ main.jsx
+
+Future Improvements
+
+Dedicated movie details page
+
+Filtering by genre and rating
+
+TMDB integration
+
+User accounts and syncing
+
+License
+
+MIT License.
+
+Contribution
+
+Pull requests are welcome.

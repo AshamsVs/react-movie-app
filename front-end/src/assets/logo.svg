@@ -1,0 +1,67 @@
+<svg width="300" height="70" viewBox="0 0 300 70" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <!-- Base gold gradient -->
+    <linearGradient id="goldBase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8EFB8"/>
+      <stop offset="40%" stop-color="#D9B867"/>
+      <stop offset="70%" stop-color="#C59638"/>
+      <stop offset="100%" stop-color="#EEDFB1"/>
+    </linearGradient>
+
+    <!-- Shine animation -->
+    <linearGradient id="shine" x1="-150%" y1="0%" x2="250%" y2="0%">
+      <stop offset="0%" stop-color="transparent" />
+      <stop offset="45%" stop-color="#ffffffa8" />
+      <stop offset="60%" stop-color="#fff" />
+      <stop offset="100%" stop-color="transparent" />
+      <animate attributeName="x1" from="-200%" to="200%" dur="2.8s" repeatCount="indefinite" />
+      <animate attributeName="x2" from="-50%" to="350%" dur="2.8s" repeatCount="indefinite" />
+    </linearGradient>
+
+    <!-- Glow filter -->
+    <filter id="goldGlow" x="-40%" y="-40%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6.5" flood-color="#C59B2A" flood-opacity="0.85"/>
+    </filter>
+  </defs>
+
+  <!-- Square Background -->
+  <rect
+    x="25"
+    y="14"
+    width="50"
+    height="50"
+    rx="10"
+    fill="rgba(0,0,0,0.55)"
+    stroke="url(#goldBase)"
+    stroke-width="2.2"
+    filter="url(#goldGlow)"
+  />
+
+  <!-- Dot row -->
+  <circle cx="34.5" cy="39" r="5" fill="url(#goldBase)" />
+  <circle cx="50" cy="39" r="5" fill="url(#goldBase)" />
+  <circle cx="65.5" cy="39" r="5" fill="url(#goldBase)" />
+
+  <!-- Shine overlay on box -->
+  <rect x="25" y="14" width="50" height="50" rx="10" fill="url(#shine)" style="mix-blend-mode:screen" />
+
+  <!-- Text -->
+  <text
+    x="105"
+    y="46"
+    font-family="Bebas Neue, Poppins, Montserrat, sans-serif"
+    font-size="32"
+    letter-spacing="3px"
+    font-weight="700"
+    fill="url(#goldBase)"
+    filter="url(#goldGlow)"
+    style="text-transform:uppercase;"
+  >
+    LibraryX
+  </text>
+
+  <!-- Shimmer effect on text -->
+  <rect x="0" y="0" width="300" height="70" fill="url(#shine)" style="mix-blend-mode:screen" />
+
+</svg>

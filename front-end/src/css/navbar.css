@@ -1,26 +1,104 @@
 :root {
-  --bg: #111;
+  --bg: #000;
+  --gold: #d4af37;
+  --gold-soft: #f6e6a8;
+  --white: #ffffff;
 }
 
+/* NAVBAR BASE */
 .nav-wrapper {
   width: 100%;
-  background: #000;
+  background: #020202;
+  backdrop-filter: blur(14px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 32px;
+  padding: 18px 36px;
   position: fixed;
   top: 0;
   z-index: 999;
+  border-bottom: 1px solid rgba(255, 215, 113, 0.12);
+  box-shadow: 0px 6px 22px rgba(212,175,55,0.15);
 }
 
-.nav-logo {
-  font-size: 1.5rem;
-  color: white;
-  font-weight: bold;
+/* LEFT SIDE */
+.nav-left {
   display: flex;
   align-items: center;
+  gap: 28px;
 }
+
+/* ------------------------------------
+   SEARCH (Apple-Style Underline)
+------------------------------------ */
+.nav-search {
+  position: relative;
+  width: 46px;
+  height: 42px;
+  transition: width .45s ease;
+}
+
+.nav-search:hover {
+  width: 260px;
+}
+
+/* Input field */
+.search-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255,215,113,0.18);
+  color: var(--white);
+  font-size: 15px;
+  padding-left: 42px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease, border-color .35s ease;
+}
+
+.nav-search:hover .search-input {
+  opacity: 1;
+  pointer-events: auto;
+  border-color: var(--gold-soft);
+}
+
+.search-input:focus {
+  outline: none;
+  border-bottom: 2px solid var(--gold-soft);
+}
+
+/* Search Icon - fixed position */
+.search-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 18px;
+  color: var(--gold);
+
+  transition: .35s ease;
+  filter: drop-shadow(0 0 4px rgba(212,175,55,0.25));
+}
+
+.search-btn:hover {
+  transform: scale(1.22);
+  color: var(--gold-soft);
+  filter: drop-shadow(0 0 14px rgba(255,215,113,0.9));
+}
+
+/* ------------------------------------
+   RIGHT SIDE MENU ICONS
+------------------------------------ */
 
 .nav-menu {
   display: flex;
@@ -28,30 +106,38 @@
   list-style: none;
 }
 
+/* Icon circle glow */
 .nav-menu li {
   position: relative;
   width: 48px;
   height: 48px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-menu li::before {
   content: "";
   position: absolute;
-  inset: 12px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  border: 2px solid var(--clr);
-  box-shadow: 0 0 6px var(--clr), 0 0 14px var(--clr);
-  transition: 0.3s ease;
-  opacity: 0.7;
+  border: 2px solid rgba(212,175,55,0.4);
+  opacity: .35;
+  transition: .35s ease;
+  box-shadow: 0 0 6px rgba(212,175,55,0.5);
 }
 
 .nav-menu li:hover::before {
-  inset: 4px;
-  box-shadow: 0 0 10px var(--clr), 0 0 25px var(--clr);
+  width: 50px;
+  height: 50px;
   opacity: 1;
+  border-color: var(--gold-soft);
+  box-shadow: 0 0 16px var(--gold), 0 0 40px var(--gold);
 }
 
+/* Icons */
 .nav-menu li a {
   width: 100%;
   height: 100%;
@@ -61,11 +147,11 @@
 }
 
 .nav-menu li a i {
-  font-size: 1.4rem;
-  color: var(--clr);
-  opacity: 0;
-  transform: scale(0.2);
-  transition: 0.3s ease;
+  font-size: 1.38rem;
+  color: var(--gold);
+  opacity: .3;
+  transform: scale(.4);
+  transition: .35s ease;
 }
 
 .nav-menu li:hover a i {
