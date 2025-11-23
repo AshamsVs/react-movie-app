@@ -1,111 +1,92 @@
-import Moviecard from "../components/Moviecard";
-import { useState, useEffect } from "react";
+// src/pages/home.jsx
+import { useEffect, useState } from "react";
 import "../css/home.css";
-import { searchMovies, getPopularMovies } from "../services/api.js";
+import { searchMovies } from "../services/api.js";
+import Sphere from "../components/Sphere.jsx";
+
+const POPULAR_QUERIES = ["marvel", "action", "drama", "comedy", "sci-fi"];
 
 function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
-  const [totalResults, setTotalResults] = useState(0);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // -------------------------------
-  // Search Handler
-  // -------------------------------
-  const handleSearch = async (text, pageNum = 1) => {
+  // Fetch multiple categories and merge into one big list
+  const loadPopularSphere = async () => {
+    setLoading(true);
+
+    const seen = new Set();
+    const allMovies = [];
+
+    for (const term of POPULAR_QUERIES) {
+      try {
+        const response = await searchMovies(term, 1); // your api.js returns { movies, totalResults }
+        (response.movies || []).forEach((m) => {
+          if (!seen.has(m.id)) {
+            seen.add(m.id);
+            allMovies.push(m);
+          }
+        });
+      } catch (err) {
+        console.error(`Error loading "${term}" movies:`, err);
+      }
+    }
+
+    setMovies(allMovies);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadPopularSphere();
+  }, []);
+
+  const handleSearch = async (text) => {
     setSearchQuery(text);
 
-    // If cleared → reset to homepage movies
-    if (text.trim() === "") {
-      const popularMovies = await getPopularMovies();
-      setMovies(popularMovies);
-      setPage(1);
-      setTotalResults(0);
+    const trimmed = text.trim();
+    if (!trimmed) {
+      // reset to popular sphere when search cleared
+      loadPopularSphere();
       return;
     }
 
+    setLoading(true);
     try {
-      setLoading(true);
-      const results = await searchMovies(text, pageNum);
-
-      setMovies(results.Search || []);
-      setTotalResults(results.totalResults || 0);
-      setPage(pageNum);
-      setError(null);
+      const response = await searchMovies(trimmed, 1);
+      setMovies(response.movies || []);
     } catch (err) {
-      setError("❌ Failed to fetch search results.");
-    } finally {
-      setLoading(false);
+      console.error("Search error:", err);
+      setMovies([]);
     }
+    setLoading(false);
   };
-
-  // -------------------------------
-  // Load Popular Movies on Page Load
-  // -------------------------------
-  useEffect(() => {
-    const loadMovies = async () => {
-      try {
-        const popularMovies = await getPopularMovies();
-        setMovies(popularMovies);
-      } catch (err) {
-        setError("❌ Failed to load movies");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadMovies();
-  }, []);
 
   return (
     <div className="home">
-
-      {/* Search Bar */}
       <form className="Search-form" onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
-          placeholder="Search for movies..."
+          placeholder="Search movies..."
           className="Search-input"
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
         />
       </form>
 
-      {/* Status Messages */}
-      {loading && <div className="loading">⏳ Loading movies...</div>}
-      {error && <div className="error">{error}</div>}
-      {!loading && !error && movies.length === 0 && (
-        <div className="no-results">🔍 No movies found.</div>
-      )}
-
-      {/* Pagination */}
-      {totalResults > 10 && (
-        <div className="pagination">
-          {page > 1 && (
-            <button onClick={() => handleSearch(searchQuery, page - 1)}>⬅ Prev</button>
-          )}
-          {page * 10 < totalResults && (
-            <button onClick={() => handleSearch(searchQuery, page + 1)}>Next ➡</button>
-          )}
+      {loading && (
+        <div className="sphere-loading">
+          <div className="sphere-loading-orb" />
+          <p>Loading your movie universe…</p>
         </div>
       )}
 
-      {/* Movie Grid */}
-<div className="movie-grid">
-  {movies.map((movie) => {
-    const formattedMovie = {
-      id: movie.imdbID,
-      title: movie.Title,
-      release_date: movie.Year,
-      poster: movie.Poster !== "N/A" ? movie.Poster : "/no-image.png"
-    };
+      {!loading && movies.length === 0 && (
+        <div className="status-text empty-text">
+          🔍 No movies found. Try another search.
+        </div>
+      )}
 
-    return <Moviecard key={movie.imdbID} movie={formattedMovie} />;
-  })}
-</div>
-
+      {!loading && movies.length > 0 && <Sphere movies={movies} />}
     </div>
   );
 }

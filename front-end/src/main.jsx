@@ -1,14 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import {BrowserRouter} from 'react-router-dom'
-import "@fortawesome/fontawesome-free/css/all.min.css";
-import './css/index.css'
-import App from './App.jsx'
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
+import { MovieProvider } from "./context/moviecontext.jsx";
+import "./css/index.css"; // <-- Fixed path
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter>
+createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <MovieProvider>
       <App />
-    </BrowserRouter>
-  </StrictMode>,
-)
+    </MovieProvider>
+  </BrowserRouter>
+);

@@ -4,34 +4,26 @@ import "../css/navbar.css";
 function NavBar() {
   return (
     <nav className="nav-wrapper">
-      <div className="nav-logo">🎬 MovieApp</div>
+      <div className="nav-logo">🎬Library</div>
 
       <ul className="nav-menu">
-
-        {/* HOME */}
-        <li style={{ "--clr": "#00eaff" }}>
+        <li style={{ "--clr": "#00E9FF" }}>
           <Link to="/">
             <i className="fa-solid fa-house"></i>
-            <span>Home</span>
           </Link>
         </li>
 
-        {/* FAVORITES */}
-        <li style={{ "--clr": "#ffd700" }}>
-          <Link to="/favourite">
-            <i className="fa-solid fa-star"></i>
-            <span>Favorites</span>
+        <li style={{ "--clr": "#C500FF" }}>
+          <Link to="/explore">
+            <i className="fa-solid fa-compass"></i>
           </Link>
         </li>
 
-        {/* PROFILE */}
-        <li style={{ "--clr": "#ff4d94" }}>
-          <Link to="/profile">
-            <i className="fa-solid fa-user"></i>
-            <span>Profile</span>
+        <li style={{ "--clr": "#FF2075" }}>
+          <Link to="/favorites">
+            <i className="fa-solid fa-heart"></i>
           </Link>
         </li>
-
       </ul>
     </nav>
   );
